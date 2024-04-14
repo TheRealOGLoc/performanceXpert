@@ -29,6 +29,9 @@ function App() {
           <NavBar user = {user} setUser={setUser} />
           <Routes>
             <Route path='/' element={<HomePage/>} />
+            <Route path='/auth' element={<AuthPage setUser={setUser} />} />
+            
+            
             <Route path='*' element={<HomePage/>} />
           </Routes>
         </>
