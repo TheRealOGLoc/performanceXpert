@@ -1,5 +1,6 @@
 import React from "react";
 import backgroundImage from "../../images/homepage-evo.jpg"
+import UploadNew from "../../components/Upload/UploadNew.tsx";
 import Upload from "../../components/Upload/Upload.tsx";
 import "./HomePage.css"
 
