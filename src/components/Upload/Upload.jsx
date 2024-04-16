@@ -86,7 +86,7 @@
 import AWS from "aws-sdk";
 import { useState } from "react";
 
-function Upload() {
+export default function Upload() {
   // Create state to store file
   const [file, setFile] = useState(null);
 
@@ -145,4 +145,4 @@ function Upload() {
   );
 }
 
-export default Upload;
+

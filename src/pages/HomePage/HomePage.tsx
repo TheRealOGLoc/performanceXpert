@@ -1,7 +1,5 @@
 import React from "react";
 import backgroundImage from "../../images/homepage-evo.jpg"
-import UploadNew from "../../components/Upload/UploadNew.tsx";
-import Upload from "../../components/Upload/Upload";
 import "./HomePage.css"
 
 export default function HomePage() {
@@ -13,7 +11,6 @@ export default function HomePage() {
                 <div className="homepage-build-text" >Build Your Car in Here</div>
                 <div className="empty-div"></div>
             </div>
-            <Upload/>
         </div>
     )
 }
