@@ -1,3 +1,8 @@
+.placeholder {
+    width: 100vw;
+    height: 80px;
+}
+
 .top-nav {
     display: flex;
     justify-content: space-between;
@@ -6,6 +11,7 @@
     background-color: white;
     width: 100vw;
     position: fixed;
+    top: 0;
     color: rgb(61, 61, 61);
     box-shadow: 0px 1px 3px 0px rgba(176, 176, 176, 0.75);
 }

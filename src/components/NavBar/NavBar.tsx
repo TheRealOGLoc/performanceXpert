@@ -14,6 +14,7 @@ function NavBar({ user, setUser }) {
 
     return (
         <>
+            <div className="placeholder" ></div>
             <nav className="top-nav" >
                 <div className="empty-div"></div>
                 <div className="nav-left">
