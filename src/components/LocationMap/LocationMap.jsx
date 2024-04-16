@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import LocationMapLabel from "../LocationMapLabel/LocationMapLabel";
 
 
-export default function LocationMap() {
+export default function LocationMap({locations}) {
 
   const [labels, setLabels] = useState([])
 
@@ -15,22 +15,11 @@ export default function LocationMap() {
       );
     }
   };
- 
-  const points = [
-    { id: 1, title: "Round Pond", lat: 51.506, lng: -0.184 },
-    { id: 2, title: "The Long Water", lat: 51.508, lng: -0.175 },
-    { id: 3, title: "The Serpentine", lat: 51.505, lng: -0.164 }
-  ];
-
-  useEffect(()=> {
-    setLabels(points.map(({ lat, lng, id, title }) => {
-      return (
-        <LocationMapLabel key={id} lat={lat} lng={lng} text={id} tooltip={title} />
-      );
-    }))  
-  }, [])
-
   
+  useEffect(() => {
+    setLabels(locations.map((location, index) => <LocationMapLabel lat={location.lat} lng={location.lng} location={location}  />))
+  })
+
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: '500px', width: '100vw', position: 'relative' }}>

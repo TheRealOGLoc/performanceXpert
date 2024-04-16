@@ -18,7 +18,7 @@ export default function LocationPage() {
     return (
         <div>
             <LocationList locations={locations} />
-            <LocationMap/>
+            <LocationMap locations={locations}/>
         </div>
         
     )
