@@ -6,8 +6,6 @@ import LocationMapLabel from "../LocationMapLabel/LocationMapLabel";
 
 export default function LocationMap({locations}) {
 
-  const [labels, setLabels] = useState([])
-
   const distanceToMouse = (pt, mp) => {
     if (pt && mp) {
       return Math.sqrt(
@@ -16,9 +14,6 @@ export default function LocationMap({locations}) {
     }
   };
   
-  useEffect(() => {
-    setLabels(locations.map((location, index) => <LocationMapLabel lat={location.lat} lng={location.lng} location={location}  />))
-  })
 
   return (
     // Important! Always set the container height explicitly
@@ -30,11 +25,11 @@ export default function LocationMap({locations}) {
           language: "en",
           region: "US"
         }}
-        defaultCenter={{ lat: 51.506, lng: -0.169 }}
+        defaultCenter={{ lat: -27.469770, lng: 153.025131 }}
         defaultZoom={15}
         distanceToMouse={distanceToMouse}
       >
-        {labels}
+        {locations.map((location, index) => <LocationMapLabel lat={location.lat} lng={location.lng} location={location} key={index} />)}
       </GoogleMapReact>
     </div>
   );

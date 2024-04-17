@@ -5,7 +5,19 @@ const brandSchema = new Schema({
     name: {
         type: String,
         required: true
-    }
+    },
+    url: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        requried: true
+    },
+    commodity: [{
+        type: Schema.Types.ObjectId,
+        ref: "Commodity"
+    }]
 }, {
     timestamps: true
 })

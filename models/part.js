@@ -5,7 +5,11 @@ const partSchema = new Schema({
     name: {
         type: String,
         required: true
-    }
+    }, 
+    commodity: [{
+        type: Schema.Types.ObjectId,
+        ref: "Commodity"
+    }]
 },  {
     timestamps: true
 })
