@@ -23,3 +23,11 @@ export function createPart(data) {
 export function getParts() {
     return sendRequest("/get-parts", "GET", null)
 }
+
+export function createCommodity(data) {
+    return sendRequest("/create-commodity", "POST", data)
+}
+
+export function getCommodities(data) {
+    return sendRequest("/get-commodities", "POST", data)
+}

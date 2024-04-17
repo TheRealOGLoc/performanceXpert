@@ -1,6 +1,7 @@
 const Location = require("../models/location")
 const Brand = require("../models/brand")
 const Part = require("../models/part")
+const Commodity = require("../models/commodity")
 
 async function createLocation(req, res) {
     const body = req.body
@@ -73,6 +74,34 @@ async function getAllPart(req, res) {
     }
 }
 
+async function createCommodities(req, res) {
+    try {
+        const body = req.body
+        const brand = body.brand
+        const part = body.part
+        const commodity = await Commodity.create({
+            name: body.name,
+            description: body.description,
+            url: body.url,
+            price: parseFloat(body.price),
+            SKU: body.SKU,
+            stock: parseFloat(body.stock)
+        })
+        const brandSchema = await Brand.findOne({name: brand})
+        brandSchema.commodity.push(commodity)
+        await brandSchema.save()
+        const partSchema = await Part.findOne({name: part})
+        partSchema.commodity.push(commodity)
+        await partSchema.save()
+        res.status(200).json(commodity)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+async function getCommodities(req, res) {
+
+}
 
 module.exports = {
     createLocation: createLocation,
@@ -80,5 +109,7 @@ module.exports = {
     createBrand: createBrand,
     getAllBrand: getAllBrand,
     createPart: createPart,
-    getAllPart, getAllPart
+    getAllPart, getAllPart,
+    createCommodities: createCommodities,
+    getCommodities: getCommodities
 }

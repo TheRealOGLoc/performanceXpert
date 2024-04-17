@@ -1,16 +1,10 @@
 import React from "react"
 import { useState, useEffect } from "react";
 import AWS from "aws-sdk";
-import { getBrands, getParts } from "../../utilities/data-service"
+import { getBrands, getParts, createCommodity } from "../../utilities/data-service"
 
 export default function UploadLocation() {
-    // Create state to store file
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [lat, setLat] = useState("")
-    const [lng, setLng] = useState("")
-    const [address, setAddress] = useState("")
-    const [rating, setRating] = useState(0)
+
     const [file, setFile] = useState(null);
 
     const [data, setData] = useState({
@@ -70,17 +64,9 @@ export default function UploadLocation() {
             // Uploading file to s3
             const uploadResult = await s3.putObject(params).promise();
             const url = `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${file.name}`;
-            const result = await createLocation({
-                "title": title,
-                "description": description,
-                "lat": lat,
-                "lng": lng,
-                "url": url,
-                "address": address,
-                "rating": rating
-            })
+            setData({ ...data, [url]: url })
+            const result = await createCommodity(data)
             console.log(result)
-
 
         } catch (error) {
             // Handle error
@@ -96,32 +82,12 @@ export default function UploadLocation() {
         setFile(file);
     };
 
-    const handleTitleInput = (e) => {
-        setTitle(e.target.value)
-    }
-
-    const handleDescriptionInput = (e) => {
-        setDescription(e.target.value)
-    }
-
-    const handleLatInput = (e) => {
-        setLat(e.target.value)
-    }
-
-    const handleLngInput = (e) => {
-        setLng(e.target.value)
-    }
-
-    const handleAddressInput = (e) => {
-        setAddress(e.target.value)
-    }
-
-    const handleRatingInput = (e) => {
-        setRating(e.target.value)
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault()
+    }
+
+    const handleInputChange = (e) => {
+        setData({ ...data, [e.target.name]: e.target.value })
     }
 
     return (
@@ -130,19 +96,23 @@ export default function UploadLocation() {
                 <div>Location Upload</div>
                 <form method="POST" onSubmit={handleSubmit} >
                     <label>File</label>
-                    <input type="file" onChange={handleFileChange} required />
-                    <label>Title</label>
-                    <input type="text" name="title" onChange={handleTitleInput} required />
+                    <input type="file" name="file" onChange={handleFileChange} required />
+                    <label>Name</label>
+                    <input type="text" name="name" onChange={handleInputChange} required />
                     <label>Description</label>
-                    <input type="text" name="description" onChange={handleDescriptionInput} required />
-                    <label>Lat</label>
-                    <input type="text" name="lat" onChange={handleLatInput} required />
-                    <label>Lng</label>
-                    <input type="text" name="lng" onChange={handleLngInput} required />
-                    <label>Address</label>
-                    <input type="text" name="address" onChange={handleAddressInput} required />
-                    <label>Rating</label>
-                    <input type="text" name="address" onChange={handleRatingInput} required />
+                    <input type="text" name="description" onChange={handleInputChange} required />
+                    <label>Price</label>
+                    <input type="text" name="price" onChange={handleInputChange} required />
+                    <label>SKU</label>
+                    <input type="text" name="SKU" onChange={handleInputChange} required />
+                    <label>Stock</label>
+                    <input type="text" name="stock" onChange={handleInputChange} required />
+                    <select name="brand" onChange={handleInputChange} >
+                        {brands.map((brand, index) => <option key={index} value={brand.name} >{brand.name}</option>)}
+                    </select>
+                    <select name="part" onChange={handleInputChange} >
+                        {parts.map((part, index) => <option key={index} value={part.name} >{part.name}</option>)}
+                    </select>
                     <input onClick={uploadFile} type="submit"></input>
                 </form>
             </div>
