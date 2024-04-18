@@ -25,6 +25,14 @@ const commoditySchema = new Schema({
     stock: {
         type: Number,
         default: 5
+    }, 
+    brand: {
+        type: String,
+        required: true
+    },
+    part: {
+        type: String,
+        requried: true
     }
 },  {
     timestamps: true

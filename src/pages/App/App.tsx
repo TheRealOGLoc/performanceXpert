@@ -7,6 +7,7 @@ import NavBar from '../../components/NavBar/NavBar.tsx';
 import HomePage from '../HomePage/HomePage.tsx';
 import LocationPage from '../LocationPage/LocationPage.tsx';
 import ProfilePage from '../ProfilePage/ProfilePage.tsx';
+import CommodityPage from "../CommodityPage/CommodityPage.tsx"
 import React from 'react';
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
             <Route path='/auth' element={<AuthPage setUser={setUser} />} />
             <Route path="/location" element={<LocationPage/>} />
             <Route path='/profile' element={<ProfilePage/>} />
+            <Route path="/parts" element={<CommodityPage parameters={null} />} />
             <Route path='*' element={<HomePage/>} />
+            
           </Routes>
         </>
     </main>

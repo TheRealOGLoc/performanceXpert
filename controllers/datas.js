@@ -85,7 +85,9 @@ async function createCommodities(req, res) {
             url: body.url,
             price: parseFloat(body.price),
             SKU: body.SKU,
-            stock: parseFloat(body.stock)
+            stock: parseFloat(body.stock),
+            brand: body.brand,
+            part: body.part
         })
         const brandSchema = await Brand.findOne({name: brand})
         brandSchema.commodity.push(commodity)
@@ -100,7 +102,12 @@ async function createCommodities(req, res) {
 }
 
 async function getCommodities(req, res) {
-
+    try {
+        const commodities = await Commodity.find({})
+        res.status(200).json(commodities)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 module.exports = {

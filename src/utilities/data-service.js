@@ -28,6 +28,6 @@ export function createCommodity(data) {
     return sendRequest("/create-commodity", "POST", data)
 }
 
-export function getCommodities(data) {
-    return sendRequest("/get-commodities", "POST", data)
+export function getCommodities() {
+    return sendRequest("/get-commodities", "GET", null)
 }
