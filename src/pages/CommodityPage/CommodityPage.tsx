@@ -4,12 +4,14 @@ import {getCommodities, searchCommodities, filterCommodities} from "../../utilit
 import CommodityPageFilter from "../../components/CommodityPageFilter/CommodityPageFilter.tsx"
 import CommodityPageSearch from "../../components/CommodityPageSearch/CommodityPageSearch.tsx"
 import CommodityPageItemList from "../../components/CommodityPageItemList/CommodityPageItemList.tsx"
+import CommodityPageSort from "../../components/CommodityPageSort/CommodityPageSort.tsx"
 
 export default function CommodityPage({ parameters }) {
 
     const [items, setItems] = useState([])
     const [search, setSearch] = useState("")
     const [searching, setSearching] = useState("")
+    const [sort, setSort] = useState(0)
 
     const [filterBrand, setFilterBrand] = useState<{}>({
         GReddy: null,
@@ -35,14 +37,6 @@ export default function CommodityPage({ parameters }) {
         setSearch(e.target.value)
     }
 
-    useEffect(() => {
-        async function getAllItems() {
-            const allItems = await getCommodities()
-            setItems(allItems)
-        }
-        getAllItems()
-    }, [])
-
     const searchItems = async () => {
         const newItems = await searchCommodities({searching: search})
         setItems(newItems)
@@ -51,10 +45,28 @@ export default function CommodityPage({ parameters }) {
     const filterItems = async () => {
         const newItems = await filterCommodities({searching: searching, 
             brands: filterBrand,
-            parts: filterPart
+            parts: filterPart,
+            sort: sort
         })
         setItems(newItems)
     }
+
+    useEffect(() => {
+        async function getAllItems() {
+            const allItems = await getCommodities()
+            setItems(allItems)
+        }
+        getAllItems()
+    }, [])
+
+    useEffect(() => {
+        async function sortItems() {
+            await filterItems()
+        }
+        sortItems()
+    }, [sort])
+
+    
 
     const setFilterToDefault = () => {
         for (const brand in filterBrand) {
@@ -68,6 +80,7 @@ export default function CommodityPage({ parameters }) {
     return (
         <div>
             <CommodityPageSearch setFilterToDefault={setFilterToDefault} search={search} searching={searching} setSearching={setSearching} handleSearch={handleSearch} searchItems={searchItems} />
+            <CommodityPageSort setSort={setSort} />
             <CommodityPageFilter filterBrand={filterBrand} filterPart={filterPart} setFilterBrand={setFilterBrand} setFilterPart={setFilterPart} filterItems={filterItems} />
             <CommodityPageItemList items={items} />
         </div>

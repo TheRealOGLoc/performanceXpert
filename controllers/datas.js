@@ -16,7 +16,7 @@ async function createLocation(req, res) {
             rating: parseFloat(body.rating)
         })
         res.json(location)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
@@ -25,7 +25,7 @@ async function getAllLocation(req, res) {
     try {
         const locations = await Location.find({})
         res.status(200).json(locations)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
@@ -39,7 +39,7 @@ async function createBrand(req, res) {
             url: body.url,
         })
         res.json(brand)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
@@ -48,7 +48,7 @@ async function getAllBrand(req, res) {
     try {
         const brands = await Brand.find({}).populate("commodity")
         res.status(200).json(brands)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
@@ -60,7 +60,7 @@ async function createPart(req, res) {
             name: body.name,
         })
         res.json(part)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
@@ -69,7 +69,7 @@ async function getAllPart(req, res) {
     try {
         const parts = await Part.find({}).populate("commodity")
         res.status(200).json(parts)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
@@ -89,10 +89,10 @@ async function createCommodities(req, res) {
             brand: body.brand,
             part: body.part
         })
-        const brandSchema = await Brand.findOne({name: brand})
+        const brandSchema = await Brand.findOne({ name: brand })
         brandSchema.commodity.push(commodity)
         await brandSchema.save()
-        const partSchema = await Part.findOne({name: part})
+        const partSchema = await Part.findOne({ name: part })
         partSchema.commodity.push(commodity)
         await partSchema.save()
         res.status(200).json(commodity)
@@ -122,13 +122,12 @@ async function searchCommodities(req, res) {
 }
 
 async function filterCommodities(req, res) {
+
     try {
-        const { searching, brands, parts } = req.body;
-        
-        // 将搜索字符串转换为小写
+        const { searching, brands, parts, sort } = req.body;
+
         const search = searching.toLowerCase();
 
-        // 构建基础查询
         const baseQuery = { name: { $regex: new RegExp(search, 'i') } };
 
         for (const brand in brands) {
@@ -143,23 +142,22 @@ async function filterCommodities(req, res) {
             }
         }
 
-        // 如果 brands 不为空，则加入品牌筛选条件
         if (brands && Object.keys(brands).length > 0) {
             const brandQuery = { brand: { $in: Object.keys(brands) } };
             Object.assign(baseQuery, brandQuery);
         }
 
-        // 如果 parts 不为空，则加入零件筛选条件
         if (parts && Object.keys(parts).length > 0) {
             const partQuery = { part: { $in: Object.keys(parts) } };
             Object.assign(baseQuery, partQuery);
         }
-        console.log(baseQuery)
-
-        // 执行查询
-        const commodities = await Commodity.find(baseQuery);
-        
-        // 返回结果
+        let commodities = null
+        const numSort = parseInt(sort)
+        if (!numSort) {
+            commodities = await Commodity.find(baseQuery);
+        } else {
+            commodities = await Commodity.find(baseQuery).sort({ price: numSort })
+        }
         res.status(200).json(commodities);
     } catch (err) {
         console.error(err);
@@ -177,5 +175,5 @@ module.exports = {
     createCommodities: createCommodities,
     getCommodities: getCommodities,
     searchCommodities: searchCommodities,
-    filterCommodities:filterCommodities
+    filterCommodities: filterCommodities
 }
