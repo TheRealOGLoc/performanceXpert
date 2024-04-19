@@ -110,6 +110,63 @@ async function getCommodities(req, res) {
     }
 }
 
+async function searchCommodities(req, res) {
+    try {
+        const search = req.body.searching.toLowerCase();
+        const commodities = await Commodity.find({ name: { $regex: new RegExp(search, 'i') } });
+        res.status(200).json(commodities);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+async function filterCommodities(req, res) {
+    try {
+        const { searching, brands, parts } = req.body;
+        
+        // 将搜索字符串转换为小写
+        const search = searching.toLowerCase();
+
+        // 构建基础查询
+        const baseQuery = { name: { $regex: new RegExp(search, 'i') } };
+
+        for (const brand in brands) {
+            if (brands[brand] === null) {
+                delete brands[brand]
+            }
+        }
+
+        for (const part in parts) {
+            if (parts[part] === null) {
+                delete parts[part]
+            }
+        }
+
+        // 如果 brands 不为空，则加入品牌筛选条件
+        if (brands && Object.keys(brands).length > 0) {
+            const brandQuery = { brand: { $in: Object.keys(brands) } };
+            Object.assign(baseQuery, brandQuery);
+        }
+
+        // 如果 parts 不为空，则加入零件筛选条件
+        if (parts && Object.keys(parts).length > 0) {
+            const partQuery = { part: { $in: Object.keys(parts) } };
+            Object.assign(baseQuery, partQuery);
+        }
+        console.log(baseQuery)
+
+        // 执行查询
+        const commodities = await Commodity.find(baseQuery);
+        
+        // 返回结果
+        res.status(200).json(commodities);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 module.exports = {
     createLocation: createLocation,
     getAllLocation: getAllLocation,
@@ -118,5 +175,7 @@ module.exports = {
     createPart: createPart,
     getAllPart, getAllPart,
     createCommodities: createCommodities,
-    getCommodities: getCommodities
+    getCommodities: getCommodities,
+    searchCommodities: searchCommodities,
+    filterCommodities:filterCommodities
 }

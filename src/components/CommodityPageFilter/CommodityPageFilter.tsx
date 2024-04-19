@@ -3,32 +3,12 @@ import { getBrands, getParts } from "../../utilities/data-service"
 import { useState, useEffect } from "react"
 import CommodityPageFilterSelect from "../CommodityPageFilterSelect/CommodityPageFilterSelect.tsx"
 
-export default function CommodityPageFilter() {
+export default function CommodityPageFilter({filterBrand, filterPart, setFilterBrand, setFilterPart, filterItems}) {
 
     const [brands, setBrands] = useState([])
     const [parts, setParts] = useState([])
     const [showBrands, setShowBrands] = useState<boolean>(false)
     const [showParts, setShowParts] = useState<boolean>(false)
-
-    const [filterBrand, setFilterBrand] = useState<{}>({
-        GReddy: null,
-        Brembo: null,
-        HKS: null,
-        Mugen: null,
-        Nismo: null,
-        STI: null,
-        TRD: null,
-        YOKOHAMA: null
-    })
-
-    const [filterPart, setFilterPart] = useState<{}>({
-        Engine: null,
-        Turbo: null,
-        Widebody: null,
-        Rim: null,
-        Break: null,
-        Other: null
-    })
 
     useEffect(() => {
         async function getBrandsParts() {
@@ -64,19 +44,23 @@ export default function CommodityPageFilter() {
         }
     }
 
+    const handleFilter = () => {
+        filterItems()
+    }
+
     return (
         <div>
             <button onClick={showBrandSelections} >Brands</button>
             { showBrands ? <div>
-                {brands.map((brand, index) => <CommodityPageFilterSelect updateFilterBrand={updateFilterBrand} name={brand.name} key={index} />)}
+                {brands.map((brand, index) => <CommodityPageFilterSelect updateFilterBrand={updateFilterBrand} condition={filterBrand[brand.name]} name={brand.name} key={index} />)}
             </div> : <div></div> }
             
 
             <button onClick={showPartSelections} >Parts</button>
             { showParts ? <div>
-                {parts.map((part, index) => <CommodityPageFilterSelect updateFilterPart={updateFilterPart} name={part.name} key={index} />)}
+                {parts.map((part, index) => <CommodityPageFilterSelect updateFilterPart={updateFilterPart} condition={filterPart[part.name]} name={part.name} key={index} />)}
             </div> : <div></div> }
-            <button>Set Filter</button>
+            <button onClick={handleFilter} >Set Filter</button>
         </div>
     )
 }

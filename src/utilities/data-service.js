@@ -31,3 +31,11 @@ export function createCommodity(data) {
 export function getCommodities() {
     return sendRequest("/get-commodities", "GET", null)
 }
+
+export function searchCommodities(data) {
+    return sendRequest("/search-commodities", "POST", data)
+}
+
+export function filterCommodities(data) {
+    return sendRequest("/filter-commodities", "POST", data)
+}

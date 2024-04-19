@@ -67,7 +67,6 @@ export default function UploadLocation() {
             setData({ ...data, [url]: url })
             const result = await createCommodity(data)
             console.log(result)
-
         } catch (error) {
             // Handle error
             console.error("Error uploading file:", error);

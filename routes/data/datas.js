@@ -17,5 +17,7 @@ router.get("/get-parts", dataController.getAllPart)
 // commodity
 router.post("/create-commodity", dataController.createCommodities)
 router.get("/get-commodities", dataController.getCommodities)
+router.post("/search-commodities", dataController.searchCommodities)
+router.post("/filter-commodities", dataController.filterCommodities)
 
 module.exports = router

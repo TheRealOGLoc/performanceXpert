@@ -1,25 +1,28 @@
 import React from "react"
-import { useState } from "react"
 import "./CommodityPageSearch.css"
 
-export default function CommodityPageSearch() {
-
-    const [search, setSearch] = useState("")
-
-    const handleSearch = (e) => {
-        setSearch(e.target.value)
-    }
+export default function CommodityPageSearch({setFilterToDefault, search, searching, setSearching, handleSearch, searchItems }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setSearching(search)
+        searchItems()
+        setFilterToDefault()
     }
 
     return (
-        <div className="commoditypage-search">
+        <div>
+            <div className="commoditypage-search">
                 <form method="POST" className="commoditypage-search-form" onSubmit={handleSubmit} >
-                    <input type="text" placeholder="Search by Brand, Part, or Name" className="commoditypage-search-input" onChange={handleSearch} />
+                    <input type="text" placeholder="Search by Name" className="commoditypage-search-input" onChange={handleSearch} />
                     <input type="submit" className="commoditypage-search-btn" name="↵" value={"↵"} />
                 </form>
+
             </div>
+            <div>
+                {searching === "" ? <div></div> : <div>Search for: {searching}</div>}
+            </div>
+        </div>
+
     )
 }
