@@ -2,8 +2,9 @@ import React from "react"
 import { useState, useEffect } from "react"
 import {getCommodities} from "../../utilities/data-service"
 import CommodityPageFilter from "../../components/CommodityPageFilter/CommodityPageFilter.tsx"
+import CommodityPageSearch from "../../components/CommodityPageSearch/CommodityPageSearch.tsx"
 
-export default function AllCommodityPage({ parameters }) {
+export default function CommodityPage({ parameters }) {
 
     const [items, setItems] = useState([])
 
@@ -17,6 +18,7 @@ export default function AllCommodityPage({ parameters }) {
 
     return (
         <div>
+            <CommodityPageSearch/>
             <CommodityPageFilter/>
         </div>
     )

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./CommodityPageFilterSelect.css"
 
 interface CommodityPageFilterSelectProps {
     name: string;
@@ -20,9 +21,9 @@ const CommodityPageFilterSelect: React.FC<CommodityPageFilterSelectProps> = ({ n
     };
 
     return (
-        <div data-name={name} onClick={() => handleClick(name)}>
-            <div>{name}</div>
-            {tick ? <div>☑</div> : <div>☐</div>}
+        <div className="filter-select" data-name={name} onClick={() => handleClick(name)}>
+            <div className="filter-select-name" >{name}</div>
+            {tick ? <div className="filter-select-tick" >☑</div> : <div className="filter-select-tick" >☐</div>}
         </div>
     );
 };

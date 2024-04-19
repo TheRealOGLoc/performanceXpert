@@ -18,7 +18,7 @@ export default function CommodityPageFilter() {
         Nismo: null,
         STI: null,
         TRD: null,
-        YOKOHAMAl: null
+        YOKOHAMA: null
     })
 
     const [filterPart, setFilterPart] = useState<{}>({
