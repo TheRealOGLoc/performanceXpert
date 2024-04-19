@@ -165,6 +165,16 @@ async function filterCommodities(req, res) {
     }
 }
 
+async function findCommodity(req, res) {
+    try {
+        const body = req.body
+        const item = await Commodity.findById(body.id)
+        res.status(200).json(item)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     createLocation: createLocation,
     getAllLocation: getAllLocation,
@@ -175,5 +185,6 @@ module.exports = {
     createCommodities: createCommodities,
     getCommodities: getCommodities,
     searchCommodities: searchCommodities,
-    filterCommodities: filterCommodities
+    filterCommodities: filterCommodities,
+    findCommodity:findCommodity
 }

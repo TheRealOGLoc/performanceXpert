@@ -39,3 +39,7 @@ export function searchCommodities(data) {
 export function filterCommodities(data) {
     return sendRequest("/filter-commodities", "POST", data)
 }
+
+export function findCommodity(data) {
+    return sendRequest("/find-commodity", "POST", data)
+}

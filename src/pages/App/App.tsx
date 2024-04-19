@@ -8,6 +8,7 @@ import HomePage from '../HomePage/HomePage.tsx';
 import LocationPage from '../LocationPage/LocationPage.tsx';
 import ProfilePage from '../ProfilePage/ProfilePage.tsx';
 import CommodityPage from "../CommodityPage/CommodityPage.tsx"
+import CommodityDetailPage from '../CommodityDetailPage/CommodityDetailPage.tsx';
 import React from 'react';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/location" element={<LocationPage/>} />
             <Route path='/profile' element={<ProfilePage/>} />
             <Route path="/parts" element={<CommodityPage parameters={null} />} />
+            <Route path='/commodities/:id' element={<CommodityDetailPage/>} />
             <Route path='*' element={<HomePage/>} />
             
           </Routes>

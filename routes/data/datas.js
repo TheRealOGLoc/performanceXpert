@@ -19,5 +19,5 @@ router.post("/create-commodity", dataController.createCommodities)
 router.get("/get-commodities", dataController.getCommodities)
 router.post("/search-commodities", dataController.searchCommodities)
 router.post("/filter-commodities", dataController.filterCommodities)
-
+router.post("/find-commodity", dataController.findCommodity)
 module.exports = router

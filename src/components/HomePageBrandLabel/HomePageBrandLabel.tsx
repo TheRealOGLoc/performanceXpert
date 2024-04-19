@@ -3,7 +3,7 @@ import "./HomePageBrandLabel.css"
 
 export default function HomePageBrandLabel({ name, url }) {
     return (
-        <a href={`/item/brand/${name}`}>
+        <a href={`/parts/brand/${name}`}>
             <div className="brand-label" >
                 <div className="brand-label-name" >{name}</div>
                 <img src={url} className="brand-label-img" />
