@@ -1,13 +1,17 @@
 import React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import { findCommodity } from "../../utilities/data-service"
+import { CartContext } from "../App/CartContext"
+import { getUser } from "../../utilities/users-service"
+import { addItemToLocalStorage } from "../../utilities/cart-service"
 
 export default function CommodityDetailPage() {
     const { id } = useParams()
     const [detail, setDetail] = useState({})
     const [count, setCount] = useState(1)
     const [stock, setStock] = useState(0)
+    const {cart, setCart} = useContext(CartContext)
 
     useEffect(() => {
         async function getDetail() {
@@ -25,9 +29,22 @@ export default function CommodityDetailPage() {
     }
 
     const handleAdd = () => {
-        if (count != stock) {
+        if (count !== stock) {
             setCount(count + 1)
         }
+    }
+
+    const handleAddToCart = () => {
+        const cartCopy = [...cart];
+        cartCopy.push({
+            id: id,
+            quantity: count
+        });
+        setCart(cartCopy);
+        addItemToLocalStorage({
+            id: id,
+            quantity: count
+        })
     }
 
     return (
@@ -44,7 +61,7 @@ export default function CommodityDetailPage() {
                     <button onClick={handleAdd} >+</button>
                 </div>
             </div>
-            <button>Add to cart</button>
+            <button onClick={handleAddToCart} >Add to cart</button>
 
             <div>Description: </div>
             <div>{detail.description}</div>
