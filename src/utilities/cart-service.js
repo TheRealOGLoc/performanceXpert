@@ -29,7 +29,6 @@ export function deleteLocalStorage() {
 }
 
 export function updateQuantityLocalStorage(itemID, newValue) {
-    console.log(itemID, newValue)
     const id = `${itemID}`
     const cartData = localStorage.getItem(SiteLocalStorageName);
     const cart = cartData ? JSON.parse(cartData) : [];

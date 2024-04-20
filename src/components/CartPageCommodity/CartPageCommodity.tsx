@@ -1,37 +1,36 @@
-import React from "react"
-import { findCommodity } from "../../utilities/data-service"
-import { useState, useEffect } from "react"
-import { updateQuantityLocalStorage } from "../../utilities/cart-service"
+import React, { useState, useEffect } from "react";
+import { findCommodity } from "../../utilities/data-service";
+import { updateQuantityLocalStorage } from "../../utilities/cart-service";
 
-export default function CartPageCommodity({ id, quantity, index }) {
-
-    const [commodity, setCommodity] = useState({})
-    const [itemQuantity, setItemQuantity] = useState(0)
+export default function CartPageCommodity({ id, quantity, updatePriceList }) {
+    const [commodity, setCommodity] = useState({});
+    const [itemQuantity, setItemQuantity] = useState(0);
 
     useEffect(() => {
         async function findCommodityById() {
-            const theCommodity = await findCommodity({ id: id })
-            setCommodity(theCommodity)
+            const theCommodity = await findCommodity({ id: id });
+            setCommodity(theCommodity);
         }
-        findCommodityById()
-        setItemQuantity(quantity)
-    }, [])
+        findCommodityById();
+        setItemQuantity(quantity);
+    }, []);
 
     useEffect(() => {
-        updateQuantityLocalStorage(id, itemQuantity)
-    }, [itemQuantity])
+        updateQuantityLocalStorage(id, itemQuantity);
+        updatePriceList(id, itemQuantity)
+    }, [itemQuantity]);
 
     const handleAdd = () => {
         if (itemQuantity < commodity.stock) {
-            setItemQuantity(itemQuantity + 1)
+            setItemQuantity(itemQuantity + 1);
         }
-    }
+    };
 
     const handleMinus = () => {
         if (itemQuantity !== 1) {
-            setItemQuantity(itemQuantity - 1)
+            setItemQuantity(itemQuantity - 1);
         }
-    }
+    };
 
     return (
         <div>
@@ -52,5 +51,5 @@ export default function CartPageCommodity({ id, quantity, index }) {
                 <button>Delete</button>
             </div>
         </div>
-    )
+    );
 }

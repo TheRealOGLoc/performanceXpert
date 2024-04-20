@@ -38,12 +38,14 @@ export default function CommodityDetailPage() {
         const cartCopy = [...cart];
         cartCopy.push({
             id: id,
-            quantity: count
+            quantity: count,
+            
         });
         setCart(cartCopy);
         addItemToLocalStorage({
             id: id,
-            quantity: count
+            quantity: count,
+            price: detail.price
         })
     }
 
