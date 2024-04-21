@@ -24,4 +24,7 @@ router.post("/find-commodity", dataController.findCommodity)
 // promotion
 router.post("/find-promotion", dataController.findPromotion)
 
+// payment
+router.post("/make-payment", dataController.makePayment)
+
 module.exports = router
