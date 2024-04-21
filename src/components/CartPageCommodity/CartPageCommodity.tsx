@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { findCommodity } from "../../utilities/data-service";
-import { updateQuantityLocalStorage } from "../../utilities/cart-service";
+import { updateQuantityLocalStorage, removeCertainLocalStorage } from "../../utilities/cart-service";
 
-export default function CartPageCommodity({ id, quantity, updatePriceList }) {
+export default function CartPageCommodity({ id, quantity, updatePriceList, removePriceItem }) {
     const [commodity, setCommodity] = useState({});
     const [itemQuantity, setItemQuantity] = useState(0);
+    const itemId = useRef(null)
 
     useEffect(() => {
         async function findCommodityById() {
@@ -12,6 +13,7 @@ export default function CartPageCommodity({ id, quantity, updatePriceList }) {
             setCommodity(theCommodity);
         }
         findCommodityById();
+        itemId.current = id
         setItemQuantity(quantity);
     }, []);
 
@@ -32,6 +34,12 @@ export default function CartPageCommodity({ id, quantity, updatePriceList }) {
         }
     };
 
+    const handleDelete = () => {
+        removePriceItem(id)
+        removeCertainLocalStorage(id)
+        
+    }
+
     return (
         <div>
             <div>
@@ -48,7 +56,7 @@ export default function CartPageCommodity({ id, quantity, updatePriceList }) {
             </div>
             <div>
                 <div>$ {commodity.price}</div>
-                <button>Delete</button>
+                <button onClick={handleDelete} >Delete</button>
             </div>
         </div>
     );

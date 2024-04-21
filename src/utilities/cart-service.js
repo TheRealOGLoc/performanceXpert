@@ -41,13 +41,16 @@ export function updateQuantityLocalStorage(itemID, newValue) {
 }
 
 export function removeCertainLocalStorage(itemID) {
-    const id = `${itemID}`
+    const id = itemID
     const cartData = localStorage.getItem(SiteLocalStorageName);
     const cart = cartData ? JSON.parse(cartData) : [];
+    let index = null
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id === id ) {
-            cart.splice(i, 0)
+            index = i
+            break
         }
     }
+    cart.splice(index, 1)
     localStorage.setItem(SiteLocalStorageName, JSON.stringify(cart)); // 将数组转换为字符串
 }

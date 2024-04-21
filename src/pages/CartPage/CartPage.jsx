@@ -17,6 +17,12 @@ export default function CartPage() {
         setLocalCart(updatedPrices);
     };
 
+    const removePriceItem = (id) => {
+        const updatedPrices = localCart.filter((item) => item.id !== id);
+        setLocalCart(updatedPrices);
+    };
+    
+
     return (
         <>
             <div style={{ marginTop: "200px" }} >
@@ -25,6 +31,7 @@ export default function CartPage() {
                         id={item.id}
                         quantity={item.quantity}
                         updatePriceList={updatePriceList}
+                        removePriceItem={removePriceItem}
                         key={index}
                     />
                 ))}
