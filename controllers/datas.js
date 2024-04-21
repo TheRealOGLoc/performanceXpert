@@ -2,6 +2,7 @@ const Location = require("../models/location")
 const Brand = require("../models/brand")
 const Part = require("../models/part")
 const Commodity = require("../models/commodity")
+const Promotion = require("../models/promotion")
 
 async function createLocation(req, res) {
     const body = req.body
@@ -175,6 +176,16 @@ async function findCommodity(req, res) {
     }
 }
 
+async function findPromotion(req, res) {
+    try {
+        const body = req.body
+        const promotion = await Promotion.findOne({code: body.code})
+        res.status(200).json(promotion)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     createLocation: createLocation,
     getAllLocation: getAllLocation,
@@ -186,5 +197,6 @@ module.exports = {
     getCommodities: getCommodities,
     searchCommodities: searchCommodities,
     filterCommodities: filterCommodities,
-    findCommodity:findCommodity
+    findCommodity:findCommodity,
+    findPromotion: findPromotion
 }

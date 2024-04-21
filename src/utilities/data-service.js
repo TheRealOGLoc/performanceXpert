@@ -43,3 +43,7 @@ export function filterCommodities(data) {
 export function findCommodity(data) {
     return sendRequest("/find-commodity", "POST", data)
 }
+
+export function findPromotion(data) {
+    return sendRequest("/find-promotion", "POST", data)
+}
