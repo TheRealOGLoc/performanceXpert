@@ -5,6 +5,7 @@ import { getItemLocalStorage } from "../../utilities/cart-service.js";
 import CartPageTotalPrice from "../../components/CartPageTotalPrice/CartPageTotalPrice.tsx";
 import CartPagePersonalInfo from "../../components/CartPagePersonalInfo/CartPagePersonalInfo.tsx";
 import { getUser } from "../../utilities/users-service.js";
+import PaymentComponent from "../../components/PaymentComponent/PaymentComponent.jsx";
 
 export default function CartPage() {
     const { cart, setCart } = useContext(CartContext);
@@ -82,6 +83,10 @@ export default function CartPage() {
                 </div>
                 :
                 <div></div>}
+
+            <div>
+                <PaymentComponent localCart={localCart} totalPrice={totalPrice} userInfo={userInfo} addressInfo={addressInfo} promotion={promotion} />
+            </div>
         </div>
     );
 }

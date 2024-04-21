@@ -3,7 +3,7 @@ const Brand = require("../models/brand")
 const Part = require("../models/part")
 const Commodity = require("../models/commodity")
 const Promotion = require("../models/promotion")
-const stripe = require('stripe')(process.env.REACT_APP_STRIPE_KEY);
+const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 async function createLocation(req, res) {
     const body = req.body
@@ -180,7 +180,7 @@ async function findCommodity(req, res) {
 async function findPromotion(req, res) {
     try {
         const body = req.body
-        const promotion = await Promotion.findOne({code: body.code})
+        const promotion = await Promotion.findOne({ code: body.code })
         res.status(200).json(promotion)
     } catch (err) {
         console.log(err)
@@ -189,20 +189,16 @@ async function findPromotion(req, res) {
 
 async function makePayment(req, res) {
     try {
-        const { token } = req.body;
-        const paymentIntent = await stripe.paymentIntents.create({
-          amount: 1000, // Amount in cents
-          currency: 'usd',
-          payment_method: token,
-          confirmation_method: 'manual',
-          confirm: true,
-        });
+        const { localCart, totalPrice, userInfo, addressInfo, promotion } = req.body;
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        console.log(req.body)
         res.status(200).json({ success: true });
-      } catch (error) {
+    } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, error: 'Error processing payment.' });
-      }
+    }
 }
+
 
 module.exports = {
     createLocation: createLocation,
@@ -215,7 +211,7 @@ module.exports = {
     getCommodities: getCommodities,
     searchCommodities: searchCommodities,
     filterCommodities: filterCommodities,
-    findCommodity:findCommodity,
+    findCommodity: findCommodity,
     findPromotion: findPromotion,
     makePayment: makePayment
 }
