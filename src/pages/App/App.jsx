@@ -12,6 +12,7 @@ import CommodityDetailPage from '../CommodityDetailPage/CommodityDetailPage.tsx'
 import CartPage from '../CartPage/CartPage.jsx';
 import React from 'react';
 import CartProvider from './CartContext.jsx';
+import CommodityPageBrand from '../CommodityPageBrand/CommodityPageBrand.tsx';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -27,6 +28,7 @@ function App() {
             <Route path="/location" element={<LocationPage />} />
             <Route path='/profile' element={<ProfilePage user={user} setUser={setUser} />} />
             <Route path="/parts" element={<CommodityPage parameters={null} />} />
+            <Route path="/parts/brand/:brand" element={<CommodityPageBrand/>} />
             <Route path='/cart' element={<CartPage/>} />
             <Route path='/commodities/:id' element={<CommodityDetailPage />} />
             <Route path='*' element={<HomePage />} />

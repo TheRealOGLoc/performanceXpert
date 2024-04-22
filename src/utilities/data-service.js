@@ -47,3 +47,7 @@ export function findCommodity(data) {
 export function findPromotion(data) {
     return sendRequest("/find-promotion", "POST", data)
 }
+
+export function findBrandCommodity(data) {
+    return sendRequest("/find-brand-commodity", "POST", data)
+}

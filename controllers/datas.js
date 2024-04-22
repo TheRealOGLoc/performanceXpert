@@ -234,7 +234,16 @@ async function makePayment(req, res) {
     }
 }
 
-
+async function findBrandCommodity(req, res) {
+    try {
+        const body = req.body
+        const brand = body.brand
+        const items = await Commodity.find({brand: brand})
+        res.status(200).json(items)
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 module.exports = {
     createLocation: createLocation,
@@ -248,6 +257,7 @@ module.exports = {
     searchCommodities: searchCommodities,
     filterCommodities: filterCommodities,
     findCommodity: findCommodity,
+    findBrandCommodity:findBrandCommodity,
     findPromotion: findPromotion,
     makePayment: makePayment
 }
