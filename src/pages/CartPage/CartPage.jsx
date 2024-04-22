@@ -7,6 +7,7 @@ import CartPagePersonalInfo from "../../components/CartPagePersonalInfo/CartPage
 import { getUser } from "../../utilities/users-service.js";
 import PaymentComponent from "../../components/PaymentComponent/PaymentComponent.jsx";
 import "./CartPage.css"
+import PaymentPopup from "../../components/PaymentPopup/PaymentPopup.tsx";
 
 export default function CartPage() {
     const { cart, setCart } = useContext(CartContext);
@@ -14,7 +15,6 @@ export default function CartPage() {
     const [totalPrice, setTotalPrice] = useState(0)
     const [user, setUser] = useState(getUser())
     const [promotion, setPromotion] = useState(0)
-    const myRef = useRef(null)
     const [proceedToInfo, setProceedToInfo] = useState(false)
     const [userInfo, setUserInfo] = useState({
         name: "",
@@ -40,8 +40,6 @@ export default function CartPage() {
         setLocalCart(updatedPrices);
     };
 
-    const executeScroll = () => myRef.current.scrollIntoView()
-
     useEffect(() => {
         let total = 0
         localCart.forEach((item) => {
@@ -58,7 +56,6 @@ export default function CartPage() {
     const handleCheckOut = () => {
         if (user) {
             setProceedToInfo(true)
-            executeScroll()
         }
     }
 
@@ -80,12 +77,13 @@ export default function CartPage() {
                             ))}
                         </div>
                         <div style={proceedToInfo ? { display: "block" } : { display: "none" }} >
-                            <CartPagePersonalInfo setUserInfo={setUserInfo} setAddressInfo={setAddressInfo} />
+                            {/* <CartPagePersonalInfo setUserInfo={setUserInfo} setAddressInfo={setAddressInfo} /> */}
+                            <PaymentPopup setUserInfo={setUserInfo} setAddressInfo={setAddressInfo} localCart={localCart} totalPrice={totalPrice} userInfo={userInfo} addressInfo={addressInfo} proceedToInfo={proceedToInfo} setProceedToInfo={setProceedToInfo} promotion={promotion} />
                         </div>
 
-                        <div ref={myRef} >
+                        {/* <div>
                             <PaymentComponent localCart={localCart} totalPrice={totalPrice} userInfo={userInfo} addressInfo={addressInfo} promotion={promotion} />
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col cp-pay-container">
                         <CartPageTotalPrice totalPrice={totalPrice} setPromotion={setPromotion} />

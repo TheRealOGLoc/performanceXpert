@@ -1,0 +1,32 @@
+.ppu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(193, 193, 193, 0.72);
+    width: 100vw;
+    height: 100vh;
+}
+
+.ppu-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.ppu-close {
+    width: 35px;
+    height: 30px;
+    background-color: blue;
+    color: white;
+    border: none;
+    font-weight: bold;
+    align-self: flex-end;
+}
+
+.ppu-infos {
+    max-width: 350px;
+    align-self: center;
+}
