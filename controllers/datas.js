@@ -189,7 +189,7 @@ async function findPromotion(req, res) {
 
 async function makePayment(req, res) {
     try {
-        const { localCart, totalPrice, userInfo, addressInfo, promotion } = req.body;
+        const { user, cart, price, userInfo, addressInfo } = req.body;
         await new Promise(resolve => setTimeout(resolve, 3000));
         console.log(req.body)
         res.status(200).json({ success: true });

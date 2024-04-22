@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { CartContext } from "../App/CartContext";
 import CartPageCommodity from "../../components/CartPageCommodity/CartPageCommodity.tsx";
 import { getItemLocalStorage } from "../../utilities/cart-service.js";
@@ -13,6 +13,7 @@ export default function CartPage() {
     const [totalPrice, setTotalPrice] = useState(0)
     const [user, setUser] = useState(getUser())
     const [promotion, setPromotion] = useState(0)
+    const myRef = useRef(null)
     const [proceedToInfo, setProceedToInfo] = useState(false)
     const [userInfo, setUserInfo] = useState({
         name: "",
@@ -38,6 +39,8 @@ export default function CartPage() {
         setLocalCart(updatedPrices);
     };
 
+    const executeScroll = () => myRef.current.scrollIntoView()
+
     useEffect(() => {
         let total = 0
         localCart.forEach((item) => {
@@ -54,6 +57,7 @@ export default function CartPage() {
     const handleCheckOut = () => {
         if (user) {
             setProceedToInfo(true)
+            executeScroll()
         }
         
     }
@@ -77,14 +81,14 @@ export default function CartPage() {
             </div>
             {proceedToInfo
                 ?
-                <div>
+                <div  >
                     <CartPagePersonalInfo setUserInfo={setUserInfo} setAddressInfo={setAddressInfo} />
                     <button>Proceed to Payment</button>
                 </div>
                 :
                 <div></div>}
 
-            <div>
+            <div ref={myRef} >
                 <PaymentComponent localCart={localCart} totalPrice={totalPrice} userInfo={userInfo} addressInfo={addressInfo} promotion={promotion} />
             </div>
         </div>
