@@ -1,0 +1,17 @@
+.cm-page-bottom {
+    display: flex;
+    width: 80vw;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.cm-page-list {
+    width: 100%;
+    position: relative;
+}
+
+@media (max-width: 1200px) {
+    .cm-page-bottom {
+        
+    }
+}

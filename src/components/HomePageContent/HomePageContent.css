@@ -53,4 +53,12 @@
 .homepage-label-wrapper {
     display: flex;
     width: 70vw;
+    margin: 0 auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.homepage-label-text {
+    margin-top: 20px;
+    font-size: 30px;
 }

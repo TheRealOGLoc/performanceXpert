@@ -1,0 +1,18 @@
+.cpi-card {
+    border-radius: 0;
+    box-shadow: 0px 0px 4px 1px rgba(199,181,181,0.73);
+    height: 300px;
+}
+
+
+.cpi-img {
+    border-radius: 0;
+}
+
+.cpi-name {
+    font-size: 17px;
+}
+
+.cpi-body {
+    border-radius: none !important;
+}

@@ -181,6 +181,19 @@ async function findCommodity(req, res) {
     }
 }
 
+async function findPartCommodity(req, res) {
+    try {
+        const part = req.body.part.toLowerCase();
+        const regex = new RegExp(part, 'i');
+        const items = await Commodity.find({ part: regex });
+        console.log(items)
+        res.status(200).json(items);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false, error: 'Error finding commodities.' });
+    }
+}
+
 async function findPromotion(req, res) {
     try {
         const body = req.body
@@ -258,6 +271,7 @@ module.exports = {
     filterCommodities: filterCommodities,
     findCommodity: findCommodity,
     findBrandCommodity:findBrandCommodity,
+    findPartCommodity:findPartCommodity,
     findPromotion: findPromotion,
     makePayment: makePayment
 }

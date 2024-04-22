@@ -51,3 +51,7 @@ export function findPromotion(data) {
 export function findBrandCommodity(data) {
     return sendRequest("/find-brand-commodity", "POST", data)
 }
+
+export function findPartCommodity(data) {
+    return sendRequest("/find-part-commodity", "POST", data)
+}

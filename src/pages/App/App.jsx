@@ -27,11 +27,11 @@ function App() {
             <Route path='/auth' element={<AuthPage setUser={setUser} />} />
             <Route path="/location" element={<LocationPage />} />
             <Route path='/profile' element={<ProfilePage user={user} setUser={setUser} />} />
-            <Route path="/parts" element={<CommodityPage parameters={null} />} />
+            <Route path="/parts" element={<CommodityPage />} />
             <Route path="/parts/brand/:brand" element={<CommodityPageBrand/>} />
+            <Route path="/parts/:part" element={<CommodityPage />} />
             <Route path='/cart' element={<CartPage/>} />
             <Route path='/commodities/:id' element={<CommodityDetailPage />} />
-            <Route path='*' element={<HomePage />} />
           </Routes>
         </CartProvider>
       </>

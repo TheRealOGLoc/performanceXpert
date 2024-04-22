@@ -3,12 +3,15 @@ import CommodityPageItemList from "../../components/CommodityPageItemList/Commod
 import { useState, useEffect } from "react"
 import { findBrandCommodity } from "../../utilities/data-service"
 import { useParams } from "react-router-dom"
+import "./CommodityPageBrand.css"
 
 export default function CommodityPageBrand() {
 
     const {brand} = useParams()
 
     const [items, setItems] = useState([])
+
+    
 
     useEffect(() => {
         async function getBrandItems() {
@@ -19,6 +22,9 @@ export default function CommodityPageBrand() {
     }, [])
 
     return (
-        <CommodityPageItemList items={items} />
+        <div className="container cpb-container" >
+            <CommodityPageItemList items={items} />
+        </div>
+        
     )
 }

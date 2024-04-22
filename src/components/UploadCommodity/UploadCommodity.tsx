@@ -64,7 +64,11 @@ export default function UploadLocation() {
             // Uploading file to s3
             const uploadResult = await s3.putObject(params).promise();
             const url = `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${file.name}`;
-            setData({ ...data, [url]: url })
+            
+            setData((previousState) => {
+                const newData = {...previousState, url: url}
+                return newData
+            })
             const result = await createCommodity(data)
             console.log(result)
         } catch (error) {

@@ -16,12 +16,12 @@ function NavBar({ user, setUser }) {
                         <div className="nav-parts-btn nav-text ">FIND CAR PART↓</div>
                         <div className="nav-parts-wrapper" >
                             <div className="empty-div-2"></div>
-                            <Link to='/parts/engine' className="nav-text" >ENGINE</Link>
-                            <Link to='/parts/turbo' className="nav-text" >TURBO</Link>
-                            <Link to='/parts/spoiler' className="nav-text" >WIDEBODY</Link>
-                            <Link to='/parts/rim' className="nav-text" >RIM</Link>
-                            <Link to='/parts/break' className="nav-text" >BREAK</Link>
-                            <Link to='/parts/' className="nav-text" >ALL PARTS</Link>
+                            <a href='/parts/Engine' className="nav-text" >ENGINE</a>
+                            <a href='/parts/Turbo' className="nav-text" >TURBO</a>
+                            <a href='/parts/Widebody' className="nav-text" >WIDEBODY</a>
+                            <a href='/parts/Rim' className="nav-text" >RIM</a>
+                            <a href='/parts/Break' className="nav-text" >BREAK</a>
+                            <a href='/parts/' className="nav-text" >ALL PARTS</a>
                             <div className="empty-div-2"></div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ function NavBar({ user, setUser }) {
 
                 <div className="nav-right">
                     <Link to='/community' className="nav-text" >COMMUNITY</Link>
-                    <Link to='/cart' className="nav-text" >Cart</Link>
+                    <Link to='/cart' className="nav-text" >CART</Link>
                     {user ? <Link to="/profile" className="nav-text" >{user.name}</Link> : <Link to="/auth" className="nav-text" >LOG IN</Link>}
                 </div>
 
