@@ -1,16 +1,10 @@
 import { Link } from "react-router-dom"
 import * as userService from "../../utilities/users-service"
-import AuthPage from "../AuthPage/AuthPage"
 import React from "react";
 import './NavBar.css'
 import image1 from '../../images/icon.png'
 
 function NavBar({ user, setUser }) {
-
-    function handleLogOut() {
-        userService.logOut();
-        setUser(null);
-    }
 
     return (
         <>

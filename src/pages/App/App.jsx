@@ -25,7 +25,7 @@ function App() {
             <Route path='/' element={<HomePage />} />
             <Route path='/auth' element={<AuthPage setUser={setUser} />} />
             <Route path="/location" element={<LocationPage />} />
-            <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/profile' element={<ProfilePage user={user} setUser={setUser} />} />
             <Route path="/parts" element={<CommodityPage parameters={null} />} />
             <Route path='/cart' element={<CartPage/>} />
             <Route path='/commodities/:id' element={<CommodityDetailPage />} />

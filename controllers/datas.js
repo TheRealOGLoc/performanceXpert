@@ -4,6 +4,10 @@ const Part = require("../models/part")
 const Commodity = require("../models/commodity")
 const Promotion = require("../models/promotion")
 const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
+const Order = require("../models/order")
+const Address = require("../models/address")
+const OrderItem = require("../models/orderItem")
+const UserInfo = require("../models/userInfo")
 
 async function createLocation(req, res) {
     const body = req.body
@@ -190,14 +194,46 @@ async function findPromotion(req, res) {
 async function makePayment(req, res) {
     try {
         const { user, cart, price, userInfo, addressInfo } = req.body;
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        console.log(req.body)
+        const userId = user._id
+        const newUserInfo = await UserInfo.create({
+            name: userInfo.name,
+            email: userInfo.email,
+            mobile: userInfo.mobile,
+            creater: userId
+        })
+        const newAddress = await Address.create({
+            creater: userId,
+            addressLine1: addressInfo.addressLine1,
+            addressLine2: addressInfo.addressLine2,
+            postCode: parseInt(addressInfo.postCode),
+            suburb: addressInfo.suburb,
+            state: addressInfo.state
+        })
+        const items = [];
+        for (const item of cart) {
+            const newItem = await OrderItem.create({
+                creater: userId,
+                itemId: item.id,
+                quantity: item.quantity
+            });
+            items.push(newItem);
+        }
+        const newOrder = await Order.create({
+            creater: userId,
+            price: price,
+            address: newAddress._id,
+            userInfo: newUserInfo._id,
+            items: items,
+            status: "Paid"
+        });
+        await new Promise(resolve => setTimeout(resolve, 1000));
         res.status(200).json({ success: true });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, error: 'Error processing payment.' });
     }
 }
+
 
 
 module.exports = {
