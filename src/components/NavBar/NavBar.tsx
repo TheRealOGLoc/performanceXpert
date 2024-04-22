@@ -35,7 +35,7 @@ function NavBar({ user, setUser }) {
                 </div>
 
                 <div className="nav-right">
-                    <Link to='/community' className="nav-text" >COMMUNITY</Link>
+                    <div></div>
                     <Link to='/cart' className="nav-text" >CART</Link>
                     {user ? <Link to="/profile" className="nav-text" >{user.name}</Link> : <Link to="/auth" className="nav-text" >LOG IN</Link>}
                 </div>

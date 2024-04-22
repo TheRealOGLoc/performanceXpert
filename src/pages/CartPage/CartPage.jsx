@@ -6,6 +6,7 @@ import CartPageTotalPrice from "../../components/CartPageTotalPrice/CartPageTota
 import CartPagePersonalInfo from "../../components/CartPagePersonalInfo/CartPagePersonalInfo.tsx";
 import { getUser } from "../../utilities/users-service.js";
 import PaymentComponent from "../../components/PaymentComponent/PaymentComponent.jsx";
+import "./CartPage.css"
 
 export default function CartPage() {
     const { cart, setCart } = useContext(CartContext);
@@ -59,38 +60,40 @@ export default function CartPage() {
             setProceedToInfo(true)
             executeScroll()
         }
-        
     }
 
     return (
         <div>
-            <div style={{ marginTop: "200px" }} >
-                {localCart.map((item, index) => (
-                    <CartPageCommodity
-                        id={item.id}
-                        quantity={item.quantity}
-                        updatePriceList={updatePriceList}
-                        removePriceItem={removePriceItem}
-                        key={index}
-                    />
-                ))}
-            </div>
-            <div>
-                <CartPageTotalPrice totalPrice={totalPrice} setPromotion={setPromotion} />
-                <button onClick={handleCheckOut} >Proceed to Checkout</button>
-            </div>
-            {proceedToInfo
-                ?
-                <div  >
-                    <CartPagePersonalInfo setUserInfo={setUserInfo} setAddressInfo={setAddressInfo} />
-                    <button>Proceed to Payment</button>
-                </div>
-                :
-                <div></div>}
+            <h3>Your Cart</h3>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <div className="cartp-order-list container" >
+                            {localCart.map((item, index) => (
+                                <CartPageCommodity
+                                    id={item.id}
+                                    quantity={item.quantity}
+                                    updatePriceList={updatePriceList}
+                                    removePriceItem={removePriceItem}
+                                    key={index}
+                                />
+                            ))}
+                        </div>
+                        <div style={proceedToInfo ? { display: "block" } : { display: "none" }} >
+                            <CartPagePersonalInfo setUserInfo={setUserInfo} setAddressInfo={setAddressInfo} />
+                        </div>
 
-            <div ref={myRef} >
-                <PaymentComponent localCart={localCart} totalPrice={totalPrice} userInfo={userInfo} addressInfo={addressInfo} promotion={promotion} />
+                        <div ref={myRef} >
+                            <PaymentComponent localCart={localCart} totalPrice={totalPrice} userInfo={userInfo} addressInfo={addressInfo} promotion={promotion} />
+                        </div>
+                    </div>
+                    <div className="col cp-pay-container">
+                        <CartPageTotalPrice totalPrice={totalPrice} setPromotion={setPromotion} />
+                        <button className="cp-check-out" onClick={handleCheckOut} >Proceed to Checkout</button>
+                    </div>
+                </div>
             </div>
+
         </div>
     );
 }

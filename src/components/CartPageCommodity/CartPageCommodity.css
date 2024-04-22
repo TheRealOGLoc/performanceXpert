@@ -1,0 +1,72 @@
+.cpc-container {
+    display: flex;
+    border: solid 1px rgb(207, 207, 207);
+    padding: 5px;
+    margin: 5px;
+}
+
+.cpc-img {
+    max-width: 250px;
+}
+
+.cpc-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.cpc-name {
+    width: 200px;
+    font-weight: bold;
+}
+
+.cpc-middle {
+    display: flex;
+    height: 150px;
+    margin: auto auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cpc-right {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.cpc-quantity-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(129, 129, 237);
+    color: white;
+    border: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.cpc-quantity-button:hover {
+    background-color: rgb(82, 82, 226);
+}
+
+.cpc-delete {
+    background-color: rgb(238, 105, 105);
+    width: 30px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    align-self:flex-end;
+    transition: 0.3s
+}
+
+.cpc-delete:hover {
+    background-color: rgb(193, 48, 48);
+}
+
+.cpc-price {
+    font-size: 30px;
+    text-decoration: underline;
+}

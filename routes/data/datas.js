@@ -9,6 +9,7 @@ router.get("/get-locations", dataController.getAllLocation)
 // brand
 router.post("/create-brand", dataController.createBrand)
 router.get("/get-brands", dataController.getAllBrand)
+router.post('/find-brand', dataController.findBrand)
 
 // part
 router.post("/create-part", dataController.createPart)

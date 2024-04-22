@@ -247,6 +247,18 @@ async function makePayment(req, res) {
     }
 }
 
+async function findBrand(req, res) {
+    try {
+        const body = req.body
+        const brand = body.brand
+        const item = await Brand.find({name: brand})
+        console.log(item)
+        res.status(200).json(item)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 async function findBrandCommodity(req, res) {
     try {
         const body = req.body
@@ -273,5 +285,6 @@ module.exports = {
     findBrandCommodity:findBrandCommodity,
     findPartCommodity:findPartCommodity,
     findPromotion: findPromotion,
-    makePayment: makePayment
+    makePayment: makePayment,
+    findBrand: findBrand
 }

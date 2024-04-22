@@ -1,4 +1,5 @@
 import React from "react"
+import "./CartPagePersonalInfo.css"
 
 export default function CartPagePersonalInfo({ setUserInfo, setAddressInfo }) {
 
@@ -6,7 +7,7 @@ export default function CartPagePersonalInfo({ setUserInfo, setAddressInfo }) {
         setUserInfo((previousState) => {
             const name = e.target.name
             const value = e.target.value
-            const newInfo = {...previousState, [name]: value}
+            const newInfo = { ...previousState, [name]: value }
             return newInfo
         })
     }
@@ -15,7 +16,7 @@ export default function CartPagePersonalInfo({ setUserInfo, setAddressInfo }) {
         setAddressInfo((previousState) => {
             const name = e.target.name
             const value = e.target.value
-            const newInfo = {...previousState, [name]: value}
+            const newInfo = { ...previousState, [name]: value }
             return newInfo
         })
     }
@@ -23,29 +24,45 @@ export default function CartPagePersonalInfo({ setUserInfo, setAddressInfo }) {
     return (
         <div>
             <div>
-                <div>Receiver Infomation</div>
+                <div className="cppi-title" >Receiver Infomation</div>
                 <div>
-                    <div>Name</div>
-                    <input type="text" name="name" onChange={handleInfoChange} />
-                    <div>Email</div>
-                    <input type="email" name="email" onChange={handleInfoChange} />
-                    <div>Mobile</div>
-                    <input type="text" name="mobile" onChange={handleInfoChange} />
+                    <div className="form-floating mb-3">
+                        <input name="name" type="text" onChange={handleInfoChange} className="form-control" id="floatingInput" placeholder="Jack"/>
+                            <label htmlFor="floatingInput">Name</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input name="email"  type="email" onChange={handleInfoChange} className="form-control" id="floatingInput" placeholder="name@example.com"/>
+                            <label htmlFor="floatingInput">Email</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input name="mobile" type="text" onChange={handleInfoChange} className="form-control" id="floatingInput" placeholder="0421234567"/>
+                            <label  htmlFor="floatingInput">Mobile</label>
+                    </div>
                 </div>
             </div>
             <div>
-                <div>Address</div>
+                <div className="cppi-title" >Address</div>
                 <div>
-                    <div>Address Line 1</div>
-                    <input type="text" name="addressLine1" onChange={handleAddressChange} />
-                    <div>Address Line 2</div>
-                    <input type="text" name="addressLine2" onChange={handleAddressChange} />
-                    <div>Suburb</div>
-                    <input type="text" name="suburb" onChange={handleAddressChange} />
-                    <div>State</div>
-                    <input type="text" name="state" onChange={handleAddressChange} />
-                    <div>Postcode</div>
-                    <input type="text" name="postCode" onChange={handleAddressChange} />
+                    <div className="form-floating mb-3">
+                        <input name="addressLine1" type="text" onChange={handleAddressChange} className="form-control" id="floatingInput" placeholder="Jack"/>
+                            <label htmlFor="floatingInput">Address Line 1</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input name="addressLine2" type="text" onChange={handleAddressChange} className="form-control" id="floatingInput" placeholder="Jack"/>
+                            <label htmlFor="floatingInput">Address Line 2</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input name="suburb" type="text" onChange={handleAddressChange} className="form-control" id="floatingInput" placeholder="Jack"/>
+                            <label htmlFor="floatingInput">Suburb</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input name="state" type="text" onChange={handleAddressChange} className="form-control" id="floatingInput" placeholder="Jack"/>
+                            <label htmlFor="floatingInput">State</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input name="postCode" type="text" onChange={handleAddressChange} className="form-control" id="floatingInput" placeholder="Jack"/>
+                            <label htmlFor="floatingInput">Postcode</label>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { findCommodity } from "../../utilities/data-service";
 import { updateQuantityLocalStorage, removeCertainLocalStorage } from "../../utilities/cart-service";
+import "./CartPageCommodity.css"
 
 export default function CartPageCommodity({ id, quantity, updatePriceList, removePriceItem }) {
     const [commodity, setCommodity] = useState({});
@@ -37,26 +38,28 @@ export default function CartPageCommodity({ id, quantity, updatePriceList, remov
     const handleDelete = () => {
         removePriceItem(id)
         removeCertainLocalStorage(id)
-        
+
     }
 
     return (
-        <div>
-            <div>
-                <img src={commodity.url} alt="" />
+        <div className="cpc-container">
+            <img src={commodity.url} className="cpc-img img-fluid" />
+
+            <div className="cpc-middle" >
+
+                    <div className="cpc-name">{commodity.name}</div>
+                    <div className="cpc-sku">SKU: {commodity.SKU}</div>
+                    <div className="cpc-quantity" >
+                        <button onClick={handleMinus} className="cpc-quantity-button" >-</button>
+                        <div>{itemQuantity}</div>
+                        <button onClick={handleAdd} className="cpc-quantity-button" >+</button>
+                    </div>
+
+
             </div>
-            <div>
-                <div>{commodity.name}</div>
-                <div>{commodity.SKU}</div>
-                <div>
-                    <button onClick={handleMinus} >-</button>
-                    <div>{itemQuantity}</div>
-                    <button onClick={handleAdd} >+</button>
-                </div>
-            </div>
-            <div>
-                <div>$ {commodity.price}</div>
-                <button onClick={handleDelete} >Delete</button>
+            <div className="cpc-right" >
+                <button onClick={handleDelete} className="cpc-delete" >X</button>
+                <div className="cpc-price" >$ {commodity.price}</div>
             </div>
         </div>
     );

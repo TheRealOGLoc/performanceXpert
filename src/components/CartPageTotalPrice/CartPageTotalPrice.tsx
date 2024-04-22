@@ -1,8 +1,9 @@
 import React from "react"
 import { useState } from "react"
 import { findPromotion } from "../../utilities/data-service"
+import "./CartPageTotalPrice.css"
 
-export default function CartPageTotalPrice({totalPrice, setPromotion}) {
+export default function CartPageTotalPrice({ totalPrice, setPromotion }) {
 
     const [promotionCode, setPromotionCode] = useState("")
     const [codeFound, setCodeFound] = useState("Not searched")
@@ -33,18 +34,18 @@ export default function CartPageTotalPrice({totalPrice, setPromotion}) {
     }
 
     return (
-        <div>
-            <div>
-                <div>Promotion Code: </div>
-                <input type="text" onChange={handleChange} />
+        <div className="cptp-container" >
+            <h3>Price</h3>
+            <div>Tax (include): ${totalPrice * (1 - discount) * 0.1} </div>
+            <div className="cptp-total-price" >Total Price: ${totalPrice * (1 - discount)}</div>
+            <div className="cptp-promo" >
+                <input type="text" onChange={handleChange} placeholder="Promo Code" />
                 <button onClick={handleApplyPromotion} >Apply</button>
             </div>
             <div>
-                {codeFound === "Code Found" ? <div><div>Promotion:{codeName} Applyed</div><button onClick={handleClearPromotion} >Clear Promotion</button></div> : <div></div> }
-                {codeFound === "Code Not Found" ? <div>Promotion Code Not Found</div>: <div></div> }
+                {codeFound === "Code Found" ? <div><div>Promotion:{codeName} Applyed</div><button onClick={handleClearPromotion} >Clear Promotion</button></div> : <div></div>}
+                {codeFound === "Code Not Found" ? <div className="cptp-not-found" >Promotion Code Not Found!</div> : <div></div>}
             </div>
-            <div>Tax (include): ${totalPrice * (1 - discount) * 0.1} </div>
-            <div>Total Price: ${totalPrice * (1 - discount) }</div>
         </div>
     )
 }

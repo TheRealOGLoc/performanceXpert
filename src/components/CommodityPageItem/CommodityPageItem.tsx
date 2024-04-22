@@ -10,7 +10,8 @@ export default function CommodityPageItem({ item }) {
                         <img src={item.url} className="card-img-top cpi-img" alt="..." />
                         <div className="card-body cpi-body ">
                             <div className="card-title cpi-name ">{item.name}</div>
-                            <p className="card-text cpi-price ">$ {item.price}</p>
+                            <div>{item.brand}</div>
+                            <div className="card-text cpi-price ">$ {item.price}</div>
                         </div>
                     </div>
                 </div>
