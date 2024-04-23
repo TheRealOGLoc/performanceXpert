@@ -14,8 +14,12 @@
     border: solid 2px grey;
     padding: 8px;
     border-radius: 5px;
-    margin-top: 100px;
+    margin-top: 30px;
     transition: 0.2s;
+}
+
+.homepage-build-text {
+    margin-top: 100px;
 }
 
 .homepage-search:hover {

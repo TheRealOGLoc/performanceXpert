@@ -77,7 +77,7 @@ export default function CommodityPageFilter({ filterBrand, filterPart, setFilter
                     </div>
                 </div>
             </div>
-            <button type="button" className="btn btn-primary" onClick={handleFilter} >Set Filter</button>
+            <button type="button" className="btn btn-primary cpc-filter-btn" onClick={handleFilter} >Set Filter</button>
         </div>
     )
 }

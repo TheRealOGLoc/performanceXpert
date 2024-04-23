@@ -10,8 +10,13 @@
     position: relative;
 }
 
+.cm-page-filter {
+    margin-top: 75px;
+}
+
 @media (max-width: 1200px) {
     .cm-page-bottom {
         
     }
 }
+

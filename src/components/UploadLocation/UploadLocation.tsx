@@ -104,8 +104,8 @@ export default function UploadLocation() {
     return (
         <div className="App">
             <div>
-                <div>Location Upload</div>
-                <form method="POST" onSubmit={handleSubmit} >
+                <div style={{fontWeight: "bold", fontSize: "30px"}} >Location Upload</div>
+                <form method="POST" onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", maxWidth: "500px", margin: "0 auto"}}  >
                     <label>File</label>
                     <input type="file" onChange={handleFileChange} required />
                     <label>Title</label>
@@ -120,7 +120,7 @@ export default function UploadLocation() {
                     <input type="text" name="address" onChange={handleAddressInput} required />
                     <label>Rating</label>
                     <input type="text" name="address" onChange={handleRatingInput} required />
-                    <input onClick={uploadFile} type="submit"></input>
+                    <input onClick={uploadFile} type="submit" value="Submit Location"></input>
                 </form>
             </div>
         </div>

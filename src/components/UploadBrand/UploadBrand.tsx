@@ -81,15 +81,15 @@ export default function UploadBrand() {
     return (
         <div className="App">
             <div>
-                <div>Brand Upload</div>
-                <form method="POST" onSubmit={handleSubmit} >
+                <div  style={{fontWeight: "bold", fontSize: "30px"}}  >Brand Upload</div>
+                <form method="POST" onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", maxWidth: "500px", margin: "0 auto"}}  >
                     <label>File</label>
                     <input type="file" onChange={handleFileChange} required />
                     <label>Name</label>
                     <input type="text" name="Name" onChange={handleNameInput} required />
                     <label>Description</label>
                     <input type="text" name="description" onChange={handleDescriptionInput} required />
-                    <input onClick={uploadFile} type="submit"></input>
+                    <input onClick={uploadFile} type="submit" value={"Brand Upload"}></input>
                 </form>
             </div>
         </div>

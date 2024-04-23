@@ -26,7 +26,7 @@ function NavBar({ user, setUser }) {
                         </div>
                     </div>
                     <Link to='/location' className="nav-text" >FIND OUR LOCATION</Link>
-                    <Link to='/aiassist' className="nav-text" >AI ASSIST</Link>
+                    <div></div>
                 </div>
                 <div className="nav-middle" >
                     <Link to='/'>

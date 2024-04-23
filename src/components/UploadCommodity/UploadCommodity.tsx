@@ -20,6 +20,7 @@ export default function UploadLocation() {
 
     const [brands, setBrands] = useState([])
     const [parts, setParts] = useState([])
+    const [theUrl, setTheUrl] = useState(null)
 
     useEffect(() => {
         async function getBrandsAndParts() {
@@ -64,11 +65,12 @@ export default function UploadLocation() {
             // Uploading file to s3
             const uploadResult = await s3.putObject(params).promise();
             const url = `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${file.name}`;
-            
+            setTheUrl(url)
             setData((previousState) => {
-                const newData = {...previousState, url: url}
+                const newData = {...previousState, url: theUrl}
                 return newData
             })
+            
             const result = await createCommodity(data)
             console.log(result)
         } catch (error) {
@@ -96,8 +98,8 @@ export default function UploadLocation() {
     return (
         <div className="App">
             <div>
-                <div>Location Upload</div>
-                <form method="POST" onSubmit={handleSubmit} >
+                <div style={{fontWeight: "bold", fontSize: "30px"}}>Location Upload</div>
+                <form method="POST" onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", maxWidth: "500px", margin: "0 auto"}} >
                     <label>File</label>
                     <input type="file" name="file" onChange={handleFileChange} required />
                     <label>Name</label>
@@ -116,7 +118,7 @@ export default function UploadLocation() {
                     <select name="part" onChange={handleInputChange} >
                         {parts.map((part, index) => <option key={index} value={part.name} >{part.name}</option>)}
                     </select>
-                    <input onClick={uploadFile} type="submit"></input>
+                    <input onClick={uploadFile} type="submit" value={"Upload Commodity"}></input>
                 </form>
             </div>
         </div>

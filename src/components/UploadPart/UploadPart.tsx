@@ -30,11 +30,11 @@ export default function UploadBrand() {
     return (
         <div className="App">
             <div>
-                <div>Part Upload</div>
-                <form method="POST" onSubmit={handleSubmit} >
+                <div style={{fontWeight: "bold", fontSize: "30px"}} >Part Upload</div>
+                <form method="POST" onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", maxWidth: "500px", margin: "0 auto"}} >
                     <label>Name</label>
                     <input type="text" name="Name" onChange={handleNameInput} required />
-                    <input onClick={uploadPart} type="submit"></input>
+                    <input onClick={uploadPart} type="submit" value={"Upload Part"}></input>
                 </form>
             </div>
         </div>

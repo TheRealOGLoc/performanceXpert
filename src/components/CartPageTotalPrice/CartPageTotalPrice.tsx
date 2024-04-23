@@ -43,7 +43,7 @@ export default function CartPageTotalPrice({ totalPrice, setPromotion }) {
                 <button onClick={handleApplyPromotion} >Apply</button>
             </div>
             <div>
-                {codeFound === "Code Found" ? <div><div>Promotion:{codeName} Applyed</div><button onClick={handleClearPromotion} >Clear Promotion</button></div> : <div></div>}
+                {codeFound === "Code Found" ? <div><div>Promotion:{codeName} Applyed</div><button onClick={handleClearPromotion} style={{border:"none", backgroundColor:"red", color:"white", fontWeight:"bold"}} >Clear Promotion</button></div> : <div></div>}
                 {codeFound === "Code Not Found" ? <div className="cptp-not-found" >Promotion Code Not Found!</div> : <div></div>}
             </div>
         </div>

@@ -1,7 +1,14 @@
 .cpf-container {
     width: 200px;
+    margin-left: -100px;
+    margin-right: 10px;
 }
 
 .cpf-filters {
     border: solid 1px rgb(210, 210, 210);
+}
+
+.cpc-filter-btn {
+    margin-top: 10px;
+    border-radius: 0;
 }

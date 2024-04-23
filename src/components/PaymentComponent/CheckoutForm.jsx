@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { getUser } from '../../utilities/users-service';
+import { useNavigate } from 'react-router-dom';
+import { deleteLocalStorage } from '../../utilities/cart-service';
 
 const CheckoutForm = ({ localCart, totalPrice, userInfo, addressInfo, promotion }) => {
     const stripe = useStripe();
@@ -10,6 +12,7 @@ const CheckoutForm = ({ localCart, totalPrice, userInfo, addressInfo, promotion 
     const [paymentSuccess, setPaymentSuccess] = useState(null);
     const [paymentError, setPaymentError] = useState(null);
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -41,6 +44,8 @@ const CheckoutForm = ({ localCart, totalPrice, userInfo, addressInfo, promotion 
                 setLoading(false)
                 setPaymentSuccess('Payment successful!');
                 setPaymentError(null);
+                deleteLocalStorage()
+                navigate('/')
             } else {
                 setPaymentError('Payment failed. Please try again.');
                 setPaymentSuccess(null);
@@ -94,7 +99,7 @@ const styles = {
         transition: 'background-color 0.3s',
     },
     disabledButton: {
-        backgroundColor: '#b3b3b3', // Adjust the color for disabled state
+        backgroundColor: '#b3b3b3', 
         cursor: 'not-allowed',
     },
     error: {

@@ -26,7 +26,7 @@ export default function ProfilePage({user, setUser}) {
                 </div> : <div></div>
             }
             <div>
-                <Link to={'/'} onClick={handleLogout} >Log Out</Link>
+                <Link to={'/'} onClick={handleLogout}  style={{textDecoration:"none", color:"white", background:"blue", fontWeight:"bold", height: "60px", width:"100px", marginTop:"30px"}} >Log Out</Link>
             </div>
         </div>
     )
