@@ -63,7 +63,7 @@ export default class SignUpForm extends Component {
                   <input
                     type="name"
                     className="form-control"
-                    name="email"
+                    name="name"
                     value={this.state.name}
                     onChange={this.handleChange}
                     placeholder="name@example.com"

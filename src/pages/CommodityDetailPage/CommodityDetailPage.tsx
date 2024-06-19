@@ -11,6 +11,7 @@ export default function CommodityDetailPage() {
     const [detail, setDetail] = useState({})
     const [count, setCount] = useState(1)
     const [stock, setStock] = useState(0)
+    const [added, setAdded] = useState(false)
     const { cart, setCart } = useContext(CartContext)
 
     useEffect(() => {
@@ -47,6 +48,7 @@ export default function CommodityDetailPage() {
             quantity: count,
             price: detail.price
         })
+        setAdded(true)
     }
 
     return (
@@ -74,6 +76,7 @@ export default function CommodityDetailPage() {
                         </div>
                     </div>
                     <button onClick={handleAddToCart} className="cdp-cart-btn" >Add to cart</button>
+                    {added ? <div>Item added to your cart!</div> : "" }
                 </div>
             </div>
             <div className="row container-bottom " >

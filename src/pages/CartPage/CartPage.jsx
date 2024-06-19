@@ -60,8 +60,7 @@ export default function CartPage() {
     }
 
     return (
-        <div>
-            <h3>Your Cart</h3>
+        <div className="cartp-wrapper">
             <div className="container">
                 <div className="row">
                     <div className="col">
